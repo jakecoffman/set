@@ -2,8 +2,8 @@
   <div class="hello">
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
-    <div id="cards">
-      <div v-for="(card, index) of cards">
+    <transition-group name="bounce" id="cards">
+      <div v-for="(card, index) of cards" :key="index">
         <set-card class="animate-in"
           :shape="card.s"
           :color="card.c"
@@ -13,7 +13,7 @@
           :index="index"
           @click.native="selectHandler(index)"/>
       </div>
-    </div>
+    </transition-group>
     <hr/>
     <div id="info">
       <button @click="nosets()" class="button-primary">no sets (deal more)</button>
@@ -27,7 +27,10 @@
           </thead>
           <tbody>
           <tr v-for="player of players">
-            <td><span v-if="player.Connected === false">📴</span> {{player.Id}}</td>
+            <td>{{player.Id}}
+              <span class="aside" v-if="player.Connected === false">(offline)</span>
+              <span class="aside" v-if="you === player.Id">(you)</span>
+            </td>
             <td>{{player.Score}}</td>
           </tr>
           </tbody>
@@ -76,6 +79,7 @@
         gameId: '',
         players: [],
         version: -1,
+        you: 0,
         selected: [], // selected cards (local only),
 
         input: ''
@@ -125,6 +129,7 @@
             this.$router.push({path: this.gameId});
             this.version = data.Version;
             this.players = data.Players;
+            this.you = data.You;
             break;
           case 'all':
             this.cards = [];
@@ -242,11 +247,8 @@
     z-index: 1000;
   }
 
-  .bounceIn {
-    -webkit-animation-name: bounceIn;
-    animation-name: bounceIn;
-    -webkit-animation-duration: 0.75s;
-    animation-duration: 0.75s;
+  .bounce-enter-active {
+    animation: bounceIn 0.75s;
   }
 
   @keyframes bounceIn {
@@ -283,5 +285,9 @@
   .animate-in {
     -webkit-animation: bounceIn 1s both linear;
     animation: bounceIn 1s both linear;
+  }
+
+  .aside {
+    font-style: italic;
   }
 </style>

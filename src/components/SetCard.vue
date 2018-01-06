@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="classes">
+  <div class="card small" :class="classes">
     <div v-if="shape === 'n'" class="shape" v-for="a of amount">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 106.058">
         <path
@@ -69,7 +69,7 @@
     methods: {}
   }
 </script>
-<style>
+<style type="scss">
   @keyframes select-pop {
     0% {
       -webkit-transform: scale(1);
@@ -124,7 +124,7 @@
     animation: 0.2s select-pop;
   }
 
-  .card .shape {
+  .shape {
     position: relative;
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
@@ -135,7 +135,7 @@
     margin-bottom: 3px;
   }
 
-  .card .shape svg {
+  .shape svg {
     position: absolute;
     top: 0;
     right: 0;
@@ -143,87 +143,71 @@
     left: 0;
   }
 
-  .card.red path,
-  .card.red polygon {
+  .red path,
+  .red polygon {
     stroke: #e74c3c;
     stroke-width: 8px;
   }
 
-  .card.red.solid path,
-  .card.red.solid polygon {
+  .red.solid path,
+  .red.solid polygon {
     fill: #e74c3c;
   }
 
-  .card.red.striped path,
-  .card.red.striped polygon {
+  .red.striped path,
+  .red.striped polygon {
     fill: url("#striped-red");
   }
 
-  .card.red.hollow path,
-  .card.red.hollow polygon {
+  .red.hollow path,
+  .red.hollow polygon {
     fill: transparent;
   }
 
-  .card.green path,
-  .card.green polygon {
+  .green path,
+  .green polygon {
     stroke: #2ecc71;
     stroke-width: 8px;
   }
 
-  .card.green.solid path,
-  .card.green.solid polygon {
+  .green.solid path,
+  .green.solid polygon {
     fill: #2ecc71;
   }
 
-  .card.green.striped path,
-  .card.green.striped polygon {
+  .green.striped path,
+  .green.striped polygon {
     fill: url("#striped-green");
   }
 
-  .card.green.hollow path,
-  .card.green.hollow polygon {
+  .green.hollow path,
+  .green.hollow polygon {
     fill: transparent;
   }
 
-  .card.purple path,
-  .card.purple polygon {
+  .purple path,
+  .purple polygon {
     stroke: #9b59b6;
     stroke-width: 8px;
   }
 
-  .card.purple.solid path,
-  .card.purple.solid polygon {
+  .purple.solid path,
+  .purple.solid polygon {
     fill: #9b59b6;
   }
 
-  .card.purple.striped path,
-  .card.purple.striped polygon {
+  .purple.striped path,
+  .purple.striped polygon {
     fill: url("#striped-purple");
   }
 
-  .card.purple.hollow path,
-  .card.purple.hollow polygon {
+  .purple.hollow path,
+  .purple.hollow polygon {
     fill: transparent;
-  }
-
-  .card.card--mini {
-    width: 30px;
-    height: 45px;
-    position: relative;
-    margin: 1px;
-    -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-    cursor: default;
-  }
-
-  .card.card--mini .shape {
-    margin: 1px 0;
   }
 
   @media (max-width: 600px) {
     .card {
-      width: 70px;
       --width: 70px;
     }
   }
