@@ -16,5 +16,8 @@ export default new Router({
       name: 'game',
       component: SetGame
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
