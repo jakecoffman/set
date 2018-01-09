@@ -66,7 +66,7 @@
   import SetCard from '@/components/SetCard'
 
   export default {
-    name: 'HelloWorld',
+    name: 'SetGame',
     components: {
       SetCard
     },

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import SetGame from '@/components/SetGame'
 
 Vue.use(Router)
 
@@ -9,12 +9,12 @@ export default new Router({
     {
       path: '/',
       name: 'main',
-      component: HelloWorld
+      component: SetGame
     },
     {
       path: '/:id',
       name: 'game',
-      component: HelloWorld
+      component: SetGame
     }
   ]
 })
