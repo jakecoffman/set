@@ -10,5 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  @import 'src/assets/normalize';
+  @import 'src/assets/skeleton';
 </style>
