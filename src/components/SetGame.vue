@@ -223,7 +223,13 @@
     }
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: 451px) and (max-width: 599px){
+    #cards {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 600px) {
     #cards {
       width: 400px;
     }
