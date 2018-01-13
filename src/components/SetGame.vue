@@ -225,7 +225,7 @@
 
   @media (min-width: 600px) {
     #cards {
-      width: 400px;
+      width: 500px;
     }
   }
 
