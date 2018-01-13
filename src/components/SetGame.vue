@@ -217,13 +217,13 @@
     margin: auto;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
     #cards {
       width: 300px;
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
     #cards {
       width: 500px;
     }
