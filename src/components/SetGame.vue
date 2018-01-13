@@ -217,15 +217,15 @@
     margin: auto;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
     #cards {
       width: 300px;
     }
   }
 
-  @media (min-width: 500px) {
+  @media (min-width: 450px) {
     #cards {
-      width: 500px;
+      width: 400px;
     }
   }
 
