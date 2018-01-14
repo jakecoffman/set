@@ -3,7 +3,7 @@
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
     <transition-group name="bounce" id="cards">
-      <div v-for="(card, index) of cards" :key="index">
+      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a">
         <set-card class="animate-in"
           :shape="card.s"
           :color="card.c"
@@ -140,9 +140,10 @@
               if (this.cards.length <= update.Location) {
                 this.cards.push({})
               }
-              this.cards.splice(update.Location, 1);
-              if (update.Card.a !== -1) { // not out of cards
+              if (update.Card.a === -1) { // out of cards
                 this.cards.push(update.Card);
+              } else {
+                this.cards.splice(update.Location, 1, update.Card);
               }
             }
             this.version = data.Version;
