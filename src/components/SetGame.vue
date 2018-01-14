@@ -140,7 +140,10 @@
               if (this.cards.length <= update.Location) {
                 this.cards.push({})
               }
-              this.cards.splice(update.Location, 1, update.Card);
+              this.cards.splice(update.Location, 1);
+              if (update.Card.a !== -1) { // not out of cards
+                this.cards.push(update.Card);
+              }
             }
             this.version = data.Version;
             this.players = data.Players;
