@@ -113,6 +113,7 @@
       },
       onerror(e) {
         console.error(e);
+        this.connected = 2;
       },
       onclose(e) {
         this.connected = 2;
