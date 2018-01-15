@@ -2,7 +2,7 @@
   <div class="hello">
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
-    <transition-group name="bounce" id="cards">
+    <transition-group name="bounce" id="cards" mode="out-in">
       <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a">
         <set-card class="animate-in"
           :shape="card.s"
@@ -261,6 +261,20 @@
 
   .bounce-enter-active {
     animation: bounceIn 0.75s;
+  }
+
+  .bounce-move {
+    transition: transform 1s;
+  }
+
+  .bounce-leave-active {
+    position: absolute;
+  }
+
+  .bounce-leave-to
+    /* .list-complete-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
   }
 
   @keyframes bounceIn {
