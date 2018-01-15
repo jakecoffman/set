@@ -219,7 +219,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin: auto;
-    min-height: 100
+    min-height: 100%;
   }
 
   @media (max-width: 450px) {
