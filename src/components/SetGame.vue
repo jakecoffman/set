@@ -141,14 +141,13 @@
               if (this.cards.length <= update.Location) {
                 this.cards.push({})
               }
-              if (update.Card.a === -1) { // out of cards
-                this.cards.splice(update.Location, 1);
-              } else {
-                this.cards.splice(update.Location, 1, update.Card);
-              }
+              this.cards.splice(update.Location, 1, update.Card);
             }
             this.version = data.Version;
             this.players = data.Players;
+            break;
+          case 'cheat':
+            this.cheats = data.Sets;
             break;
           default:
             console.log("unknown type", data);
@@ -264,7 +263,7 @@
   }
 
   .bounce-move {
-    transition: transform 1s;
+    transition: transform 0.5s;
   }
 
   .bounce-leave-active {
