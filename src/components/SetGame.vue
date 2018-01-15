@@ -141,7 +141,7 @@
                 this.cards.push({})
               }
               if (update.Card.a === -1) { // out of cards
-                this.cards.push(update.Card);
+                this.cards.splice(update.Location, 1);
               } else {
                 this.cards.splice(update.Location, 1, update.Card);
               }
