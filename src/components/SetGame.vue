@@ -11,7 +11,7 @@
           :amount="card.a"
           :selected="selected"
           :index="index"
-          @click.native="selectHandler(index)"/>
+          @mousedown.native="selectHandler(index)"/>
       </div>
     </transition-group>
     <hr/>
