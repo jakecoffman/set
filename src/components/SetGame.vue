@@ -1,5 +1,18 @@
 <template>
   <div class="hello">
+    <div v-if="alert" class="info row" @click="alert=null">
+      <span v-if="you === alert.Player">you:</span>
+      <span v-else>player {{alert.Player}}:</span>
+      &nbsp;(<span v-if="alert.Score > 0">+</span>{{alert.Score}})
+      <span v-for="card of alert.Cards" :key="card.s+card.c+card.p+card.a">
+        <set-card class="animate-in tiny"
+                  :shape="card.s"
+                  :color="card.c"
+                  :pattern="card.p"
+                  :amount="card.a"/>
+      </span>
+      {{alert.Words}}
+    </div>
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
     <transition-group name="bounce" id="cards" mode="out-in">
@@ -44,6 +57,31 @@
         <input type="number" v-model="input" placeholder="Game ID" id="join">
         <button @click="join(input)">join</button>
       </div>
+      <button class="pink" @click="help = !help">how to play</button>
+      <div v-if="help" class="help column">
+        <h2>Help</h2>
+        <p>A SET is three cards where each feature, when looked at individually, is either all the <b>same</b> OR
+          all <b>different</b>. Each card contains four features: color (red, purple or green), shape (oval,
+          squiggle or diamond), number (one, two or three) and shading (solid, striped or outlined).</p>
+        <p>Examples:</p>
+        <div class="row">
+          <set-card shape="d" color="r" pattern="s" :amount="1"/>
+          <set-card shape="d" color="r" pattern="s" :amount="2"/>
+          <set-card shape="d" color="r" pattern="s" :amount="3"/>
+        </div>
+        <div class="row">
+          <set-card shape="p" color="p" pattern="s" :amount="2"/>
+          <set-card shape="d" color="p" pattern="h" :amount="2"/>
+          <set-card shape="n" color="p" pattern="z" :amount="2"/>
+        </div>
+        <div class="row">
+          <set-card shape="n" color="r" pattern="h" :amount="1"/>
+          <set-card shape="d" color="g" pattern="s" :amount="2"/>
+          <set-card shape="p" color="p" pattern="z" :amount="3"/>
+        </div>
+        <br/>
+        <button @click="help = !help">OK</button>
+      </div>
     </div>
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -83,7 +121,9 @@
         you: 0,
         selected: [], // selected cards (local only),
 
-        input: ''
+        input: '',
+        alert: null,
+        help: false
       }
     },
     mounted() {
@@ -150,6 +190,9 @@
           case 'cheat':
             this.cheats = data.Sets;
             break;
+          case 'play':
+            this.alert = data;
+            break;
           default:
             console.log("unknown type", data);
         }
@@ -178,6 +221,20 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   #striped-red rect {
     fill: #e74c3c;
   }
@@ -248,7 +305,6 @@
   }
 
   .alert {
-    display: block;
     position: fixed;
     bottom: 10px;
     left: 10px;
@@ -257,6 +313,30 @@
     color: white;
     padding: 10px 40px 10px 20px;
     z-index: 1000;
+  }
+
+  .info {
+    background: #303030;
+    color: white;
+    height: 55px;
+  }
+
+  .tiny {
+    --width: 30px;
+    width: var(--width);
+    height: calc(var(--width) * 1.5);
+  }
+
+  .help {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    margin: 0;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
   .bounce-enter-active {
@@ -315,5 +395,10 @@
 
   .aside {
     font-style: italic;
+  }
+
+  .pink {
+    background-color: pink;
+    color: white;
   }
 </style>

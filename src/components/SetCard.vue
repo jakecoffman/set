@@ -41,11 +41,11 @@
       },
       selected: {
         type: Array,
-        required: true
+        required: false
       },
       index: {
         type: Number,
-        required: true
+        required: false
       }
     },
     data() {
@@ -53,17 +53,19 @@
     },
     computed: {
       classes() {
-        return {
+        const cs = {
           red: this.color === 'r',
           purple: this.color === 'p',
           green: this.color === 'g',
 
           hollow: this.pattern === 'h',
           solid: this.pattern === 's',
-          striped: this.pattern === 'z',
-
-          selected: this.selected.indexOf(this.index) > -1
+          striped: this.pattern === 'z'
+        };
+        if (this.selected) {
+          cs.selected = this.selected.indexOf(this.index) > -1;
         }
+        return cs;
       },
     },
     methods: {}
