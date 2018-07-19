@@ -133,8 +133,8 @@
     flex: 0 0 auto;
     width: 72%;
     height: 25%;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 3%;
+    margin-bottom: 3%;
   }
 
   .shape svg {
