@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SetGame from '@/components/SetGame'
+import SetHelp from '@/components/SetHelp'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/:id',
       name: 'game',
       component: SetGame
+    },
+    {
+      path: '/:id/help',
+      name: 'help',
+      component: SetHelp
     }
   ],
   scrollBehavior (to, from, savedPosition) {

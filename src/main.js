@@ -9,6 +9,8 @@ Vue.config.productionTip = false;
 import VueTouch from 'vue-touch';
 Vue.use(VueTouch);
 
+console.log(new Date().toISOString(), 'main.js');
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
