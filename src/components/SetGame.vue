@@ -23,16 +23,14 @@
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
     <transition-group name="bounce" id="cards" mode="out-in">
-      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a">
-        <v-touch @tap="selectHandler(index)">
-          <set-card class="animate-in"
-            :shape="card.s"
-            :color="card.c"
-            :pattern="card.p"
-            :amount="card.a"
-            :selected="selected"
-            :index="index"/>
-        </v-touch>
+      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown="selectHandler(index)">
+        <set-card class="animate-in"
+          :shape="card.s"
+          :color="card.c"
+          :pattern="card.p"
+          :amount="card.a"
+          :selected="selected"
+          :index="index"/>
       </div>
     </transition-group>
     <hr/>
