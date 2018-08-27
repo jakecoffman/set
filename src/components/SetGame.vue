@@ -23,7 +23,7 @@
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
     <transition-group name="bounce" id="cards" mode="out-in">
-      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown="selectHandler(index)">
+      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown="selectHandler(index)" @touchdown="selectHandler(index)">
         <set-card class="animate-in"
           :shape="card.s"
           :color="card.c"
