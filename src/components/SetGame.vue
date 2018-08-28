@@ -24,7 +24,11 @@
         <button id="deal-btn" @click="nosets()" class="button-primary">no sets (deal more)</button>
       </div>
       <transition-group name="bounce" id="cards" mode="out-in" tag="div">
-        <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown="selectHandler(index)" @touchstart.prevent="selectHandler(index)">
+        <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a"
+             @click="selectHandler(index)"
+             @touchstart="touchStart()"
+             @touchmove="touchMove($event)"
+             @touchend="touchEnd(index, $event)">
           <set-card class="animate-in"
             :shape="card.s"
             :color="card.c"
@@ -91,7 +95,10 @@
 
         input: '',
         alert: null,
-        help: false
+        help: false,
+
+        start: null,
+        handled: false
       }
     },
     created() {
@@ -172,6 +179,9 @@
         this.ws.send(JSON.stringify({Type: "join", Data: id}));
       },
       selectHandler(location) {
+        if (this.handled) {
+          return;
+        }
         const index = this.selected.indexOf(location);
         if (index >= 0) {
           this.selected.splice(index, 1);
@@ -185,6 +195,22 @@
       },
       nosets() {
         this.ws.send(JSON.stringify({Type: 'nosets', Version: this.version}))
+      },
+      touchStart() {
+        this.start = new Date().getTime();
+        this.handled = true;
+      },
+      touchMove(e) {
+        if (new Date().getTime() - this.start < 200) {
+          e.preventDefault();
+        }
+      },
+      touchEnd(location, e) {
+        this.handled = false;
+        if (new Date().getTime() - this.start < 500) {
+          e.preventDefault();
+          this.selectHandler(location);
+        }
       }
     }
   }
@@ -347,7 +373,6 @@
     transform: rotate(-90deg);
     max-width: 8rem;
     margin-right: -3rem;
-    padding-top: 6rem;
   }
 
   .main {
