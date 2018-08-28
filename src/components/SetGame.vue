@@ -98,7 +98,7 @@
         help: false,
 
         start: null,
-        handled: false
+        handling: false
       }
     },
     created() {
@@ -179,7 +179,7 @@
         this.ws.send(JSON.stringify({Type: "join", Data: id}));
       },
       selectHandler(location) {
-        if (this.handled) {
+        if (this.handling) {
           return;
         }
         const index = this.selected.indexOf(location);
@@ -198,16 +198,18 @@
       },
       touchStart() {
         this.start = new Date().getTime();
-        this.handled = true;
+        this.handling = true;
       },
       touchMove(e) {
         if (new Date().getTime() - this.start < 200) {
           e.preventDefault();
+        } else {
+          this.handling = false;
         }
       },
       touchEnd(location, e) {
-        this.handled = false;
-        if (new Date().getTime() - this.start < 500) {
+        if (this.handling && new Date().getTime() - this.start < 500) {
+          this.handling = false;
           e.preventDefault();
           this.selectHandler(location);
         }
