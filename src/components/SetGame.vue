@@ -1,9 +1,5 @@
 <template>
   <div class="hello">
-    <div class="column">
-      <button @click="nosets()" class="button-primary">no sets (deal more)</button>
-    </div>
-
     <div v-if="alert" class="info row">
       <span v-if="you === alert.Player">you:</span>
       <span v-else>player {{alert.Player}}:</span>
@@ -22,17 +18,23 @@
     </div>
     <div v-if="connected===0" class="alert">Connecting</div>
     <div v-if="connected===2" class="alert">Disconnected, reload to rejoin</div>
-    <transition-group name="bounce" id="cards" mode="out-in">
-      <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown.stop="selectHandler(index)" @touchdown.stop="selectHandler(index)">
-        <set-card class="animate-in"
-          :shape="card.s"
-          :color="card.c"
-          :pattern="card.p"
-          :amount="card.a"
-          :selected="selected"
-          :index="index"/>
+
+    <div class="main">
+      <div class="column" id="deal">
+        <button id="deal-btn" @click="nosets()" class="button-primary">no sets (deal more)</button>
       </div>
-    </transition-group>
+      <transition-group name="bounce" id="cards" mode="out-in" tag="div">
+        <div v-for="(card, index) of cards" :key="card.s+card.c+card.p+card.a" @mousedown="selectHandler(index)" @touchstart.prevent="selectHandler(index)">
+          <set-card class="animate-in"
+            :shape="card.s"
+            :color="card.c"
+            :pattern="card.p"
+            :amount="card.a"
+            :selected="selected"
+            :index="index"/>
+        </div>
+      </transition-group>
+    </div>
     <hr/>
     <div class="column" id="more">
       <div id="players">
@@ -214,6 +216,10 @@
     background: #4aa3df;
   }
 
+  .hello {
+    padding-top: 55px;
+  }
+
   #cards {
     display: flex;
     flex-direction: row;
@@ -231,13 +237,13 @@
 
   @media (min-width: 451px) and (max-width: 599px){
     #cards {
-      width: 100%;
+      width: 350px;
     }
   }
 
   @media (min-width: 600px) {
     #cards {
-      width: 400px;
+      width: 500px;
     }
   }
 
@@ -259,7 +265,7 @@
 
   .info {
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     background: #303030;
@@ -335,5 +341,17 @@
   .pink {
     background-color: pink;
     color: white;
+  }
+
+  #deal {
+    transform: rotate(-90deg);
+    max-width: 8rem;
+    margin-right: -3rem;
+    padding-top: 6rem;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
   }
 </style>

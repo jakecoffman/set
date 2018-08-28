@@ -110,7 +110,7 @@
     cursor: pointer;
     -webkit-transition: -webkit-transform 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
-    margin: 10px;
+    margin: 5px;
   }
 
   .card:nth-child(4n + 1) {

@@ -44,4 +44,8 @@ export default {
     align-items: center;
     justify-content: center;
   }
+
+  .flex-1 {
+    flex: 1;
+  }
 </style>
