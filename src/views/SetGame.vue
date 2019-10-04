@@ -104,14 +104,11 @@
     created() {
       let url;
       if (location.protocol === 'https:') {
-        url = 'wss://';
+        url = `wss://${location.host}/ws`;
       } else {
-        url = 'ws://';
+        url = `ws://${location.host}/ws`;
       }
-      url += location.host + location.pathname + (location.pathname.endsWith('/') ? 'ws' : '/ws');
-      console.log(new Date().toISOString(), 'SetGame.vue');
       this.ws = new WebSocket(url);
-      console.log(new Date().toISOString(), 'connecting to ' + url);
 
       this.ws.onopen = this.onopen.bind(this);
       this.ws.onerror = this.onerror.bind(this);
@@ -119,9 +116,8 @@
       this.ws.onmessage = this.onmessage.bind(this);
     },
     methods: {
-      onopen(e) {
+      onopen() {
         this.connected = 1;
-        console.log(new Date().toISOString(), 'connected');
         if (this.$route.params.id) {
           this.join(this.$route.params.id);
         } else {
@@ -129,10 +125,11 @@
         }
       },
       onerror(e) {
+        // eslint-disable-next-line no-console
         console.error(e);
         this.connected = 2;
       },
-      onclose(e) {
+      onclose() {
         this.connected = 2;
       },
       onmessage(e) {
@@ -140,7 +137,6 @@
         switch (data.Type) {
           case "cookie":
             document.cookie = data.Cookie;
-            console.log("Set cookie", data.Cookie);
             break;
           case 'meta':
             this.gameId = data.GameId;
@@ -172,6 +168,7 @@
             this.alert = data;
             break;
           default:
+            // eslint-disable-next-line no-console
             console.log("unknown type", data);
         }
       },
@@ -217,8 +214,6 @@
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   * {
     -webkit-box-sizing: border-box;
@@ -380,5 +375,19 @@
   .main {
     display: flex;
     flex-direction: row;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>
