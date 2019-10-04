@@ -18,34 +18,3 @@
     </svg>
   </div>
 </template>
-
-<script>
-  console.log(new Date().toISOString(), 'App.vue');
-
-export default {
-  name: 'app'
-}
-</script>
-
-<style lang="scss">
-  @import 'src/assets/normalize';
-  @import 'src/assets/skeleton';
-
-  .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .flex-1 {
-    flex: 1;
-  }
-</style>

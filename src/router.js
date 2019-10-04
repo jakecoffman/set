@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import SetGame from '@/components/SetGame'
-import SetHelp from '@/components/SetHelp'
+import SetGame from './views/SetGame'
+import SetHelp from './views/SetHelp'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -23,7 +25,7 @@ export default new Router({
       component: SetHelp
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior() {
     return { x: 0, y: 0 }
   }
 })

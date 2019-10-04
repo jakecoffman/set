@@ -39,7 +39,7 @@
     }
   }
 </script>
-<style type="scss">
+<style scoped>
   .help {
     padding: 2em;
   }
@@ -51,5 +51,11 @@
   }
   #striped-purple rect {
     fill: #9b59b6;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 </style>
